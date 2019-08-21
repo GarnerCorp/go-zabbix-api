@@ -111,7 +111,7 @@ func (api *API) ProxiesDelete(proxies Proxies) (err error) {
 func (api *API) ProxiesDeleteByIds(ids []string) (err error) {
 	proxyIds := make([]map[string]string, len(ids))
 	for i, id := range ids {
-		proxyIds[i] = map[string]string{"proxyid": id}
+		proxyIds[i] = map[string]string{"proxy": id}
 	}
 
 	response, err := api.CallWithError("proxy.delete", proxyIds)
