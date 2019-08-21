@@ -111,13 +111,13 @@ func (api *API) ProxiesDelete(proxies Proxies) (err error) {
 func (api *API) ProxiesDeleteByIds(ids []string) (err error) {
 	proxyIds := make([]map[string]string, len(ids))
 	for i, id := range ids {
-		proxyIds[i] = map[string]string{"proxy": id}
+		proxyIds[i] = map[string]string{"proxyid": id}
 	}
 
 	response, err := api.CallWithError("proxy.delete", proxyIds)
 	if err != nil {
 		// Zabbix 2.4 uses new syntax only
-		if e, ok := err.(*Error); ok && e.Code == -32500 {
+		if e, ok := err.(*Error); ok && e.Code == -32602 {
 			response, err = api.CallWithError("proxy.delete", ids)
 		}
 	}
